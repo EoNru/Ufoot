@@ -1,0 +1,73 @@
+html, body { height: 99%; width: 99%; }
+canvas { display: block; }
+
+body {
+	background: #333;
+	color: #fff;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 18px;	
+}
+
+h1 {
+	padding-top: 30px;
+	font-size: 30px;
+	margin-bottom: 30px;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a.button {
+	background: #185da8;
+	border-radius: 5px;
+	display: block;
+	font-size: 30px;
+	margin: 40px 0 0 290px;
+	padding: 10px;
+	width: 200px;
+	cursor: pointer;
+}
+
+a.button:hover {
+	background: #2488f5;
+	color: #fff;
+	text-decoration: none;
+}
+
+#game {
+	height: 600px;
+	left: 50%;
+	margin: -300px 0 0 -400px;
+	position: relative;
+	top: 50%;
+	width: 800px;
+	text-align: center;
+}
+
+#gameUI {
+	height: 600px;
+	position: absolute;
+	width: 800px;
+}
+
+.gameSettings {
+	text-align: justify;
+	left: 90%;
+	top: 30%;
+}
+
+#gameCanvas {
+	background: #284C28;
+}
+
+#shopCanvas {
+	background: red;
+	position: absolute;
+	padding: 50px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Лучший симулятор футбола! Сразись с друзьями!</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/client.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/game.css">
+	<audio id="menuAudio" loop>
+		<source src="sounds/technobells.wav">Your browser does not support HTML5 audio</source>
+	</audio>
+</head>
+<body>
+	<div id="game">
+		<div id="gameUI">
+			<div id="gameMenu">
+				<h1 id="title">Угарный футбол!</h1>
+				<p><a id="startGame" class="button" href="">Играть</a></p>
+				<p><a id="settings" class="button" href="">Настройки</a></p>
+				<p><a id="shopButton" class="button" href="">Магазин</a></p>
+				<p><a id="stats" class="button" href="">Статистика</a></p>
+			</div>
+			<div class="gameSettings" hidden>
+				<form action="">
+					<input type="radio" name="screen" value="window" checked>Windowed<br>
+					<input type="radio" name="screen" value="fullscreen">Fullscreen
+				</form>
+			</div>
+			<div id="shop">
+			</div>
+		</div>
+		<canvas id="gameCanvas" width="800" height="540">Ваш браузер не поддерживает эту игру. Настоятельно рекомендуем установить современный браузер, например Google Chrome или Mozilla Firefox.</canvas>
+		<div>
+			<p id="gameLog">log data...</p>
+		</div>
+        <audio id="gameSoundGoal">
+            <source src="sounds/cheer.mp3">
+        </audio>
+	</div>
+</body>
+</html>
