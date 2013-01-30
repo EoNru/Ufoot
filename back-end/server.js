@@ -1,7 +1,7 @@
 var System = require("sys");
 var http = require('http');
 var WebSocketServer = require('C:/Users/EoN/node_modules/websocket').server;
-var Game = require("D:/xampp/htdocs/projects/Football/game");
+var Game = require("D:/xampp/htdocs/projects/Football/Ufoot/back-end/game");
 
 var Connections = {};
 var MaxConnections = 500;
