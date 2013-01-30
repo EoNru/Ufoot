@@ -58,6 +58,7 @@ function HandleClientMessage(Message, connection) {
     switch (message.Type) {
         case "Join": // Client started the game
             Connections[message.VKid] = connection;
+            connection.ID = message.VKid;
             System.log("Player ID = " + message.VKid);
             Game.AddNewPlayer(message.VKid, message.Name);
             break;
@@ -65,10 +66,10 @@ function HandleClientMessage(Message, connection) {
             Game.AddNewPlayer(message.VKid);
             break;
         case "Name":
-            Game.ChangePlayerName(message.UserID, message.PlayerName);
+            Game.ChangePlayerName(message.VKid, message.Name);
             break;
         case "Cancel":
-            Game.DeletePlayer(message.UserID);
+            Game.DeletePlayer(message.VKid);
             break;
         case "Control":
             Game.UpdateControl(message.VKid, message.Controls, message.Hit);
@@ -77,6 +78,8 @@ function HandleClientMessage(Message, connection) {
 }
 
 function HandleClientClosure (ID) {
+    // TODO: delete from searching pool, not from the server
+    Game.DeletePlayer(ID);
     delete Connections[ID];
 }
 

@@ -120,12 +120,25 @@ function CreateNewRoom() {
 	rooms.push(newRoom);
 }
 
+function DeletePlayer(userID) {
+    var playerIndex = players[userID].indexInRoom;
+    var tmpArray;
+    var playersInRoom = rooms[players[userID].roomID].localPlayers.length;
+    if(!rooms[players[userID].roomID].full) {
+        tmpArray = rooms[players[userID].roomID].localPlayers;
+        tmpArray = tmpArray.slice(0, playerIndex);
+        tmpArray = tmpArray.concat(tmpArray.slice(playerIndex, playersInRoom));
+        rooms[players[userID].roomID].localPlayers = tmpArray;
+        rooms[players[userID].roomID].localPlayers.length = playersInRoom - 1;
+    }
+}
 if (typeof exports !== "undefined")
 {
 	exports.GC = GC;
 	exports.rooms = rooms;
 	exports.players = players;
 	exports.AddNewPlayer = AddNewPlayer;
+    exports.DeletePlayer = DeletePlayer;
 	exports.UpdateRoom = UpdateRoom;
 	exports.UpdateControl = UpdateControl;
 }
