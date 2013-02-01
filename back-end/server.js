@@ -1,7 +1,7 @@
 var System = require("sys");
 var http = require('http');
 var WebSocketServer = require('C:/Users/EoN/node_modules/websocket').server;
-var Game = require("D:/xampp/htdocs/projects/Football/game");
+var Game = require("D:/xampp/htdocs/projects/Football/Ufoot/back-end/game");
 
 var Connections = {};
 var MaxConnections = 500;
@@ -58,6 +58,7 @@ function HandleClientMessage(Message, connection) {
     switch (message.Type) {
         case "Join": // Client started the game
             Connections[message.VKid] = connection;
+            connection.ID = message.VKid;
             System.log("Player ID = " + message.VKid);
             Game.AddNewPlayer(message.VKid, message.Name);
             break;
@@ -65,10 +66,10 @@ function HandleClientMessage(Message, connection) {
             Game.AddNewPlayer(message.VKid);
             break;
         case "Name":
-            Game.ChangePlayerName(message.UserID, message.PlayerName);
+            Game.ChangePlayerName(message.VKid, message.Name);
             break;
         case "Cancel":
-            Game.DeletePlayer(message.UserID);
+            Game.DeletePlayer(message.VKid);
             break;
         case "Control":
             Game.UpdateControl(message.VKid, message.Controls, message.Hit);
@@ -77,6 +78,8 @@ function HandleClientMessage(Message, connection) {
 }
 
 function HandleClientClosure (ID) {
+    // TODO: delete from searching pool, not from the server
+    Game.DeletePlayer(ID);
     delete Connections[ID];
 }
 
@@ -86,7 +89,9 @@ setInterval(function() {
             Game.UpdateRoom(roomID);
         }
         for(var i = 0; i < Game.rooms[roomID].localPlayers.length; i++) {
-            Connections[Game.rooms[roomID].localPlayers[i].playerID].send(JSON.stringify({Type: "GS", State: Game.rooms[roomID]}));
+            if(Game.rooms[roomID].localPlayers[i] != "undefined") {
+                Connections[Game.rooms[roomID].localPlayers[i].playerID].send(JSON.stringify({Type: "GS", State: Game.rooms[roomID]}));
+            }
         }
     }
 }, Game.GC.frameTime);

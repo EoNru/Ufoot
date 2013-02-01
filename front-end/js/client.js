@@ -96,8 +96,8 @@ function InitWebConnection() {
     // if user is running mozilla then use it's built-in WebSocket
     var WebSocketObject = WebSocket || MozWebSocket;
     if (WebSocketObject) {
-        //Socket = new WebSocketObject("ws://188.32.221.178:9001");
-        Socket = new WebSocketObject("ws://109.120.169.143:9001");
+        Socket = new WebSocketObject("ws://188.32.221.178:9001");
+        // Socket = new WebSocketObject("ws://109.120.169.143:9001");
         // Socket = new WebSocketObject("ws://localhost:9001/");
         Socket.onopen = function () {
             // connection is opened and ready to use
