@@ -89,7 +89,9 @@ setInterval(function() {
             Game.UpdateRoom(roomID);
         }
         for(var i = 0; i < Game.rooms[roomID].localPlayers.length; i++) {
-            Connections[Game.rooms[roomID].localPlayers[i].playerID].send(JSON.stringify({Type: "GS", State: Game.rooms[roomID]}));
+            if(Game.rooms[roomID].localPlayers[i] != "undefined") {
+                Connections[Game.rooms[roomID].localPlayers[i].playerID].send(JSON.stringify({Type: "GS", State: Game.rooms[roomID]}));
+            }
         }
     }
 }, Game.GC.frameTime);

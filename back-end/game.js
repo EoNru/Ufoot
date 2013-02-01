@@ -21,7 +21,7 @@ var GC = { //Game Constants
     barSize: 10,
     barMass: 10000000000, // really big mass
     goalSize: 140, // in pixels
-	roomCapacity: 1
+	roomCapacity: 4
 };
 
 var players = [];
@@ -122,14 +122,15 @@ function CreateNewRoom() {
 
 function DeletePlayer(userID) {
     var playerIndex = players[userID].indexInRoom;
-    var tmpArray;
-    var playersInRoom = rooms[players[userID].roomID].localPlayers.length;
-    if(!rooms[players[userID].roomID].full) {
-        tmpArray = rooms[players[userID].roomID].localPlayers;
-        tmpArray = tmpArray.slice(0, playerIndex);
-        tmpArray = tmpArray.concat(tmpArray.slice(playerIndex, playersInRoom));
-        rooms[players[userID].roomID].localPlayers = tmpArray;
-        rooms[players[userID].roomID].localPlayers.length = playersInRoom - 1;
+    var roomID = players[userID].roomID;
+    var i; // counter
+    console.log("Local players before: " + rooms[roomID].localPlayers);
+    rooms[roomID].localPlayers.splice(playerIndex, 1);
+    console.log("Local players after: " + rooms[roomID].localPlayers);
+    delete players[userID];
+    // Shift indexes
+    for(i = playerIndex; i < rooms[roomID].localPlayers.length; i++) {
+        rooms[roomID].localPlayers[i].indexInRoom = i;
     }
 }
 if (typeof exports !== "undefined")
